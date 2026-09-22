@@ -90,3 +90,16 @@ y_pred_classes = np.argmax(predictions, axis=1)
 
 print("\nClassification Report:")
 print(classification_report(Y_test, y_pred_classes, target_names=['Aegypti', 'Albopictus']))
+
+import pickle
+
+# 7. Save the model as a .pkl file (architecture + weights)
+model_data = {
+    'architecture': model.to_json(),
+    'weights': model.get_weights()
+}
+
+with open('mosquito_model.pkl', 'wb') as f:
+    pickle.dump(model_data, f)
+
+print("Model saved to mosquito_model.pkl")
